@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:RouteCicleRegistrationApp"
+             x:Class="RouteCicleRegistrationApp.MainPage"
+             Title="Registo de rotas">
+
+    <ContentPage.BindingContext>
+        <local:RoutesViewModel />
+    </ContentPage.BindingContext>
+    
+    <ScrollView>
+        <VerticalStackLayout
+            BackgroundColor="#ebebeb"
+            Padding="10,0"
+            Spacing="5">
+            <Label FontAttributes="Bold"
+                 HorizontalOptions="Center"
+                 Margin="0,20,0,0"
+                 Text="Edifício">
+            </Label>
+            
+            <Picker x:Name="BuildingPicker"
+                    Title="Selecione o Edifício"
+                    MaximumWidthRequest="200" 
+                    SelectedIndexChanged="OnBuildingPickerSelected">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>VS1</x:String>
+                        <x:String>VS2</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <CollectionView 
+                    ItemsSource="{Binding Routes}"
+                    Margin="10">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="4"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Button 
+                            Margin="10"
+                            LineBreakMode="WordWrap"
+                            MinimumHeightRequest="75"
+                            Text="{Binding RouteName}"
+                            Command="{Binding RouteCommand}"
+                            Clicked="Button_Clicked"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
